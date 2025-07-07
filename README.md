@@ -31,8 +31,8 @@ WebDriver server.
 * **C++17 Compiler:**  A C++17 compatible compiler (e.g., GCC 8+, Clang 8+).
 * **nlohmann/json:** A header-only JSON library.  
 [https://github.com/nlohmann/json](https://github.com/nlohmann/json)
-* **curling:** A modern C++ HTTP client library. 
-[https://github.com/PonyUV/curling](https://github.com/paul-caron/curling)
+* **:** A modern C++ HTTP client library. 
+[https://github.com/paul-caron/curling](https://github.com/paul-caron/curling)
 
 ## Installation
 
