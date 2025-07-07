@@ -1,0 +1,48 @@
+name: Curly Chungus WebDriver CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  webdriver-tests:
+    runs-on: ubuntu-latest
+
+    container:
+      image: zenika/alpine-chrome:with-node
+      options: --user 0
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install test dependencies
+        run: |
+          apk update
+          apk add --no-cache \
+            g++ \
+            cmake \
+            make \
+            curl-dev \
+            unzip \
+            xvfb \
+            chromium-chromedriver
+
+      - name: Start virtual display (Xvfb)
+        run: |
+          export DISPLAY=:99
+          Xvfb :99 -screen 0 1920x1080x24 &
+          sleep 2
+
+      - name: Start ChromeDriver
+        run: |
+          chromedriver --port=4444 &
+          sleep 3  # wait for server to start
+
+      - name: Run tests
+        env:
+          DISPLAY: :99
+        run: |
+          make run-tests
